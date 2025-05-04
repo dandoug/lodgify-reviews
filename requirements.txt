@@ -1,0 +1,8 @@
+astroid==3.3.9
+dill==0.4.0
+isort==6.0.1
+mccabe==0.7.0
+platformdirs==4.3.7
+pylint==3.3.7
+python-dotenv==1.1.0
+tomlkit==0.13.2

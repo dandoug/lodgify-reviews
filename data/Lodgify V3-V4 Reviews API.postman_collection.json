@@ -1,0 +1,239 @@
+{
+	"info": {
+		"_postman_id": "765ddda1-c19c-4c94-b043-84786838c7dc",
+		"name": "Lodgify V3/V4 Reviews API",
+		"description": "This collection contains examples of the CURD opertations from the [Logify](https://www.lodgify.com/) APIs that manipulate reviews. They are not public. They could change. This is what I observed in May 2025.\n\nThe requests make use of a view variables\n\n- **AUTH_TOKEN** - This is the `Bearer` token that authorizes the API calls. Pull it from your browser interactions with [https://app.lodgify.com/reviews/website.](https://app.lodgify.com/reviews/website.) Use this token in the `Authorization` section as a `Bearer` token.\n    \n- **PROP_ID** - This is the `int32` identifier of the property that your reviews are asociated with. Find it in [https://app.lodgify.com/rentals-list](https://app.lodgify.com/rentals-list)\n    \n- **REVIEW_ID** - This is the `int32` identifier of an individual review returned from the list and create APIs and used on edit, get and delete.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44647116",
+		"_collection_link": "https://danielgdouglas.postman.co/workspace/Daniel-G-Douglas's-Workspace~1fdfb50d-163a-4d14-85d5-7f2e8d7b2602/collection/44647116-765ddda1-c19c-4c94-b043-84786838c7dc?action=share&source=collection_link&creator=44647116"
+	},
+	"item": [
+		{
+			"name": "Create a review",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"propertyId\": \"{{PROP_ID}}\",\n    \"review\": {\n        \"rating\": 5,\n        \"guestEmail\": \"\",\n        \"guestCountry\": \"US\",\n        \"guestName\": \"Kristen H.XXX\",\n        \"guestType\": \"FamilyWithOlderChildren\",\n        \"roomName\": \"\",\n        \"stayDate\": \"2021-01\",\n        \"text\": \"We had a fabulous time at this beautiful home. Laura was wonderful and made us feel so welcome. The home had everything we could have ever wanted and the proximity to skiing at Northstar was great with the shuttle picking up right at the house. The setting is so picturesque. We can’t wait to return!\",\n        \"title\": \"Wonderful mountain getaway XXX\",\n        \"source\": \"VRBO\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://app.lodgify.com/api/v4/property/{{PROP_ID}}/reviews",
+					"protocol": "https",
+					"host": [
+						"app",
+						"lodgify",
+						"com"
+					],
+					"path": [
+						"api",
+						"v4",
+						"property",
+						"{{PROP_ID}}",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit a review",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"propertyId\": \"{{PROP_ID}}\",\n    \"review\": {\n        \"guestCountry\": \"US\",\n        \"guestName\": \"Herb C.\",\n        \"guestType\": \"FamilyWithOlderChildren\",\n        \"rating\": 5,\n        \"source\": \"VRBO\",\n        \"text\": \"Great property and the property manager was very friendly, helpful and responsive. Will definitely look to stay at this place again next time I'm heading up to Tahoe!\",\n        \"title\": \"Great stay, very convenient to the slopes!\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://app.lodgify.com/api/v3/property/reviews/{{REVIEW_ID}}",
+					"protocol": "https",
+					"host": [
+						"app",
+						"lodgify",
+						"com"
+					],
+					"path": [
+						"api",
+						"v3",
+						"property",
+						"reviews",
+						"{{REVIEW_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a review",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://app.lodgify.com/api/v3/property/{{PROP_ID}}/reviews/{{REVIEW_ID}}",
+					"protocol": "https",
+					"host": [
+						"app",
+						"lodgify",
+						"com"
+					],
+					"path": [
+						"api",
+						"v3",
+						"property",
+						"{{PROP_ID}}",
+						"reviews",
+						"{{REVIEW_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a review",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://app.lodgify.com/api/v3/property/{{PROP_ID}}/reviews/{{REVIEW_ID}}",
+					"protocol": "https",
+					"host": [
+						"app",
+						"lodgify",
+						"com"
+					],
+					"path": [
+						"api",
+						"v3",
+						"property",
+						"{{PROP_ID}}",
+						"reviews",
+						"{{REVIEW_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get list of reviews for account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"page\": 1,\n    \"pageSize\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://app.lodgify.com/api/v3/property/reviews",
+					"protocol": "https",
+					"host": [
+						"app",
+						"lodgify",
+						"com"
+					],
+					"path": [
+						"api",
+						"v3",
+						"property",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{AUTH_TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "AUTH_TOKEN",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "PROP_ID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "REVIEW_ID",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
