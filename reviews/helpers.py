@@ -33,11 +33,11 @@ def build_headers(include_content_type: bool = True):
     """
     result = {
         'Authorization': f'Bearer {os.environ.get("AUTH_TOKEN")}',
-        'Content-Encoding': 'utf-8',
         'Accept': 'application/json'
     }
     if include_content_type:
         result['Content-Type'] = 'application/json'
+        result['Content-Encoding'] = 'utf-8'
     return result
 
 

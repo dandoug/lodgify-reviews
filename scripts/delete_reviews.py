@@ -6,10 +6,11 @@ import os
 import sys
 from pathlib import Path
 from dotenv import load_dotenv
+
 sys.path.append(str(Path(__file__).parent.parent))  # Add project root to Python path
 # pylint: disable=wrong-import-position,import-error
 from reviews.helpers import confirm_action
-
+from reviews.delete import delete_single_review, delete_all_reviews
 
 if __name__ == "__main__":
     load_dotenv()  # Load props from .env
@@ -31,10 +32,11 @@ if __name__ == "__main__":
         if not prop_id:  # needs to either come from arg lien or default
             raise ValueError("prop_id missing")
         print(f"Deleting single review: {review_id} using prop_id: {prop_id}")
+        delete_single_review(review=review_id, prop=prop_id)
     else:
-        # Bulk delete for account
+        # Bulk delete for the account
         print("Deleting all reviews for account")
         if confirm_action():  # deleting all is pretty destructive, double check
-            print("Deleting all reviews for account")
+            delete_all_reviews()
         else:
             print("Aborting")
