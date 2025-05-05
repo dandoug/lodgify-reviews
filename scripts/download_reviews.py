@@ -2,12 +2,14 @@
 Get a single review or all reviews
 """
 import argparse
+import json
 import os
 import sys
 from pathlib import Path
 from dotenv import load_dotenv
 sys.path.append(str(Path(__file__).parent.parent))  # Add project root to Python path
-
+# pylint: disable=wrong-import-position,import-error
+from reviews.download import download_all_reviews, download_single_review
 
 if __name__ == "__main__":
     load_dotenv()  # Load props from .env
@@ -39,8 +41,13 @@ if __name__ == "__main__":
 
             print(f"downloading single review: {review_id} " +
                   f"using prop_id: {prop_id} to {output_name}")
+            data = download_single_review(review=review_id, prop=prop_id)
         else:
-            print("downloading all reviews for account to {output_name}")
+            print(f"downloading all reviews for account to {output_name}")
+            data = download_all_reviews()
+
+        # write out the results
+        json.dump(data, args.output, indent=2)
     finally:
         if not is_stdout:
             # close the file as long as it's not stdout
