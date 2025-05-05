@@ -7,9 +7,12 @@ import os
 import sys
 from pathlib import Path
 from dotenv import load_dotenv
+
+
 sys.path.append(str(Path(__file__).parent.parent))  # Add project root to Python path
 # pylint: disable=wrong-import-position,import-error
 from reviews.download import download_all_reviews, download_single_review
+from reviews.helpers import require_prop
 
 if __name__ == "__main__":
     load_dotenv()  # Load props from .env
@@ -34,10 +37,7 @@ if __name__ == "__main__":
     try:
         if args.review:
             review_id = args.review
-            prop_id = args.prop
-            if not prop_id:
-                # needs to either come from arg lien or default env var (.env)
-                raise ValueError("prop_id missing")
+            prop_id = require_prop(args)
 
             print(f"downloading single review: {review_id} " +
                   f"using prop_id: {prop_id} to {output_name}")

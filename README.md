@@ -80,8 +80,13 @@ Run a script from the top level directory of this project using a command like
 ```bash
 python scripts/delete_reviews.py --review 394007 --prop 669875
 ```
+
+<p><br/></p>
+
+### List of scripts
 * [download_reviews.py](#download_reviewspy)
 * [delete_reviews.py](#delete_reviewspy)
+* [import_reviews.py](#import_reviewspy)
 
 
 
@@ -125,7 +130,7 @@ python scripts/download_reviews.py --output reviews.json
 ```
 
 ### import_reviews.py
-This script will import reviews from a file.  The file is in of two formats and the choice is indicated by the extension of the input filename.  In either case, the process will create one review at a time and messages about progress and errors will be sent to the console.
+This script will import reviews from a file.  The file is in one of two formats and the choice is indicated by the extension of the input filename.  In either case, the process will create one review at a time and messages about the reesults and errors will be sent to the console.
 
 #### Input file formats
 

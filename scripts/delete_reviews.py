@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 sys.path.append(str(Path(__file__).parent.parent))  # Add project root to Python path
 # pylint: disable=wrong-import-position,import-error
-from reviews.helpers import confirm_action
+from reviews.helpers import confirm_action, require_prop
 from reviews.delete import delete_single_review, delete_all_reviews
 
 if __name__ == "__main__":
@@ -28,9 +28,8 @@ if __name__ == "__main__":
     if args.review:
         # Single review delete
         review_id = args.review
-        prop_id = args.prop
-        if not prop_id:  # needs to either come from arg lien or default
-            raise ValueError("prop_id missing")
+        prop_id = require_prop(args)
+
         print(f"Deleting single review: {review_id} using prop_id: {prop_id}")
         delete_single_review(review=review_id, prop=prop_id)
     else:

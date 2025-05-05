@@ -1,6 +1,7 @@
 """
 Helper functions for lodgify-reviews
 """
+import argparse
 import os
 
 
@@ -62,3 +63,29 @@ def check_status_and_extract(response):
     if not response_data.get('success'):
         raise ValueError(f"Request failed with message: {response_data.get('message')}")
     return response_data
+
+
+
+def require_prop(args: argparse.Namespace) -> int:
+    """
+    Ensures a required property is provided by the user. This function checks if
+    the required property `prop_id` is present in the provided arguments. If
+    `prop_id` is missing, an error is raised to indicate an invalid invocation.
+
+    :param args: Parsed command-line arguments encapsulated in an argparse.Namespace
+                 object. This should include the property `prop` that is required
+                 for further processing.
+
+    :raises ValueError: If the required property `prop_id` is not provided or is
+                        missing from the arguments.
+
+    :return: The property identifier value extracted from the provided arguments
+             if it is present.
+
+    :rtype: int
+    """
+    prop_id = args.prop
+    if not prop_id:
+        # needs to either come from arg lien or default env var (.env)
+        raise ValueError("prop_id missing")
+    return prop_id

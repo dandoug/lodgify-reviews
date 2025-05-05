@@ -10,6 +10,20 @@ from reviews.helpers import build_headers, check_status_and_extract
 
 
 def delete_single_review(review, prop):
+    """
+    Deletes a single review from a property using the specified review ID and property ID.
+    This function communicates with an external API endpoint and removes the provided
+    review, if it exists and the request is successful.
+
+    :param review: The unique identifier of the review to delete.
+    :type review: str
+    :param prop: The unique identifier of the property associated with the review.
+    :type prop: str
+    :return: None
+    :raises ValueError: If the server response contains invalid JSON.
+    :raises RequestException: If the request fails due to connectivity issues or an
+        invalid request.
+    """
     url = f"{API_BASE}/v3/property/{prop}/reviews/{review}"
 
     try:
@@ -42,7 +56,7 @@ def _delete_reviews(reviews: list[tuple[int, int]]) -> None:
     :raises RequestException: If fetching (DELETE) operations fail or encounter errors.
     """
     with requests.Session() as session:
-        session.headers.update(build_headers(build_headers(include_content_type=False)))
+        session.headers.update(build_headers(include_content_type=False))
 
         for review, prop in reviews:
             try:
